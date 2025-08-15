@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameController {
     private char[][] board = new char[3][3];
     private char currentPlayer = 'X';
+
     @GetMapping("/board")
     public String[][] getBoard() {
         String[][] result = new String[3][3];
@@ -20,6 +21,7 @@ public class GameController {
         }
         return result;
     }
+    
     @PostMapping("/move")
     public String makeMove(@RequestParam int row, @RequestParam int col) {
         if(row < 0 || row > 2 || col < 0 || col > 2) {
@@ -29,10 +31,23 @@ public class GameController {
             board[row][col] = currentPlayer;
             currentPlayer = (currentPlayer == 'X') ? 'O': 'X';
             String winner = checkWinner();
-            
+            // String turn = (currentPlayer == 'X') ? "Xのターン" : "Oのターン";
+            if (winner != null) {
+                return winner;
+            } else {
+                String even = checkEven();
+                if (even != null) {
+                    return even; // 引き分けの場合
+                }
+            }
             return winner != null ? winner : "Move made";
         }
         return "Invalid move";
+    }
+    @PostMapping("/reset")
+    public void restGame() {
+        board = new char[3][3];
+        currentPlayer = 'X'; // ゲームをリセットしてXから開始
     }
     private String checkWinner() {
         for (int i = 0; i < 3; i++) {
@@ -50,5 +65,15 @@ public class GameController {
             return board[0][2] + " の勝利";
         }
         return null;
+    }
+    private String checkEven() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '\0') {
+                    return null; // ゲームはまだ続いている
+                }
+            }
+        }
+        return "引き分け"; // 全てのマスが埋まっている場合
     }
 }

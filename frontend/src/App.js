@@ -31,7 +31,21 @@ function App() {
       setMessage('手番に失敗しました');
     }
   };
-
+  const resetClick = async () => {
+    try {
+      console.log('リセットボタンがクリックされました');
+      
+      setBoard([['','',''], ['','',''], ['','','']]);
+      const response = await axios.post(`http://localhost:8081/api/game/reset`);
+      console.log('ボードがリセットされました');
+      setMessage('');
+      fetchBoard();
+      console.log('ボードを再取得しました');
+    } catch (error) {
+      console.log('エラー: リセット失敗', error); 
+      setMessage('リセットに失敗しました');
+    }
+  }
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
       <h1>○×ゲーム</h1>
@@ -55,7 +69,7 @@ function App() {
                 height: '100px',
                 fontSize: '2em',
                 border: '2px solid #333',
-                backgrand: cell ? (cell === 'X' ? '#ffcccc' : '#ccffcc'): '#fff',
+                background: cell ? (cell === 'X' ? '#ffcccc' : '#ccffcc'): '#fff',
                 cursor: cell ? 'default' : 'pointer',
               }}
               disabled={cell !== ''}
@@ -64,6 +78,8 @@ function App() {
             </button>
           ))
         )}
+        {message === "引き分け" || message.indexOf("勝") != -1 ? (
+          <button onClick={() => {resetClick()}}>リセット</button>): null}
       </div>
     </div>
   );
