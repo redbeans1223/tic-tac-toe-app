@@ -81,14 +81,13 @@ function App() {
           ))
         )}
       </div>
-      {(message === "引き分け" || message.includes("勝")) && (
         <button
           onClick={resetClick}
           className="reset-button"
         >
           リセット
         </button>
-      )}
+      
     </div>
   );
 }
