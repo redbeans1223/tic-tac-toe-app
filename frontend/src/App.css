@@ -17,6 +17,7 @@ body {
   font-size: 1.25rem;
   margin-bottom: 1rem;
   font-weight: 600;
+  min-height: 2rem;
 }
 
 button {
@@ -26,7 +27,19 @@ button {
 button:hover {
   transform: scale(1.05);
 }
+.reset-button {
+  background: #dc2626; /* 赤系の目立つ色 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
 
+.reset-button:hover {
+  background: #b91c1c; /* ホバー時の濃い赤 */
+}
 h1 {
   color: #333;
 }

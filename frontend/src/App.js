@@ -84,15 +84,7 @@ function App() {
       {(message === "引き分け" || message.includes("勝")) && (
         <button
           onClick={resetClick}
-          style={{
-            marginTop: '1rem',
-            padding: '0.5rem 1rem',
-            background: '#2563eb',
-            color: '#fff',
-            borderRadius: '0.5rem',
-            border: 'none',
-            cursor: 'pointer',
-          }}
+          className="reset-button"
         >
           リセット
         </button>
