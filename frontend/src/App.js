@@ -47,31 +47,18 @@ function App() {
     }
   }
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h1>○×ゲーム</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen text-white">
+          <h1 className="text-5xl font-bold mb-6">○×ゲーム</h1>
       <div className="message">{message}</div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 100px)',
-          gap: '5px',
-          margin: '20px auto',
-          width: 'fit-content',
-        }}
-      >
+      <div className="grid grid-cols-3 gap-3 w-80">
         {board.map((row, i) => 
           row.map((cell, j) => (
             <button
               key={`${i}-${j}`}
               onClick={() => handleClick(i, j)}
-              style={{
-                width: '100px',
-                height: '100px',
-                fontSize: '2em',
-                border: '2px solid #333',
-                background: cell ? (cell === 'X' ? '#ffcccc' : '#ccffcc'): '#fff',
-                cursor: cell ? 'default' : 'pointer',
-              }}
+              className={`w-24 h-24 text-3xl font-semibold rounded-lg shadow-lg border-2 border-gray-300 
+                ${cell ? (cell === 'X' ? 'bg-red-200' : 'bg-green-200') : 'bg-white hover:bg-gray-100'} 
+                flex items-center justify-center transition-all duration-200`}
               disabled={cell !== ''}
             >
               {cell}
@@ -79,7 +66,10 @@ function App() {
           ))
         )}
         {message === "引き分け" || message.indexOf("勝") != -1 ? (
-          <button onClick={() => {resetClick()}}>リセット</button>): null}
+          <button
+            onClick={() => {resetClick()}}
+            className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"            
+          >リセット</button>): null}
       </div>
     </div>
   );
