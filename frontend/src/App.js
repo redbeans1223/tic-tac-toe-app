@@ -12,7 +12,7 @@ function App() {
   
   const fetchBoard = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/api/game/board');
+      const response = await axios.get('http://153.127.51.201/api/game/board');
       console.log('API Response: ', response.data);
       setBoard(response.data);
     } catch (error) {
@@ -23,7 +23,7 @@ function App() {
   const handleClick = async (row, col) => {
     console.log('handleClick: ', row, col);
     try {
-      const response = await axios.post(`http://localhost:8081/api/game/move?row=${row}&col=${col}`);
+      const response = await axios.post(`http://153.127.51.201/api/game/move?row=${row}&col=${col}`);
       setMessage(response.data);
       fetchBoard();
     } catch (error) {
@@ -36,7 +36,7 @@ function App() {
       console.log('リセットボタンがクリックされました');
       
       setBoard([['','',''], ['','',''], ['','','']]);
-      const response = await axios.post(`http://localhost:8081/api/game/reset`);
+      const response = await axios.post(`http://153.127.51.201/api/game/reset`);
       console.log('ボードがリセットされました');
       setMessage('');
       fetchBoard();
