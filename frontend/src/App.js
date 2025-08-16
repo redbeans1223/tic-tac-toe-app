@@ -49,7 +49,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
+      <div style={{ textAlign: 'center', padding: '20px' }}>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: '#fff' }}>○×ゲーム</h1>
       <div className="message">{message}</div>
       <div
